@@ -23,6 +23,16 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="ambient" aria-hidden="true">
+    <span class="cube cube-a"></span>
+    <span class="cube cube-b"></span>
+    <span class="cube cube-c"></span>
+    <span class="cube cube-d"></span>
+    <span class="cube cube-e"></span>
+    <span class="rift rift-a"></span>
+    <span class="rift rift-b"></span>
+  </div>
+
   <header class="site-header">
     <a class="brand" href="#top" aria-label="白马公会首页">
       <img src="assets/baima-logo.png" alt="白马公会标志">
@@ -31,25 +41,21 @@
     <nav class="nav-links" aria-label="主导航">
       <a href="#about">公会</a>
       <a href="#roster">阵容</a>
+      <a href="#management">管理</a>
       <a href="#join">加入</a>
     </nav>
   </header>
 
   <main id="top">
     <section class="hero">
-      <div class="hero-bg" aria-hidden="true">
-        <span class="block block-a"></span>
-        <span class="block block-b"></span>
-        <span class="block block-c"></span>
-        <span class="block block-d"></span>
-      </div>
+      <div class="hero-grid" aria-hidden="true"></div>
       <div class="hero-content">
         <p class="eyebrow">Minecraft PvP Guild</p>
         <h1>白马公会</h1>
         <p class="hero-copy">以速度压制对手，以配合撕开战线。这里是热爱竞技、愿意变强、敢打正面的玩家集合地。</p>
         <div class="hero-actions">
           <a class="button primary" href="#join">申请加入</a>
-          <a class="button ghost" href="#about">了解战力</a>
+          <a class="button ghost" href="#management">查看管理</a>
         </div>
       </div>
       <aside class="emblem-panel" aria-label="公会标志">
@@ -68,17 +74,17 @@
       </div>
       <div class="intro-grid">
         <article>
-          <span class="card-icon">⚔</span>
+          <span class="card-icon">剑</span>
           <h3>正面压制</h3>
           <p>围绕剑术、走位、连击节奏训练，强调稳定输出和临场换位。</p>
         </article>
         <article>
-          <span class="card-icon">◆</span>
+          <span class="card-icon">阵</span>
           <h3>团队战术</h3>
           <p>分工明确，支援、收割、拉扯、控场都有位置，不靠各打各的硬拼。</p>
         </article>
         <article>
-          <span class="card-icon">▣</span>
+          <span class="card-icon">练</span>
           <h3>持续成长</h3>
           <p>日常约战、复盘、练习服磨合，让新人有路可练，老手有局可打。</p>
         </article>
@@ -129,6 +135,91 @@
       </div>
     </section>
 
+    <section id="management" class="section management">
+      <div class="section-title">
+        <p class="eyebrow">Management</p>
+        <h2>白马管理席位</h2>
+        <p>公会秩序、约战安排、成员审核与战术组织，由管理组共同维护。</p>
+      </div>
+      <div class="manager-grid">
+        <article class="manager leader">
+          <span class="rank">Guild Master</span>
+          <strong>楚🐷王</strong>
+          <p>总负责人</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>安卓猫迷紫猪</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>安卓猫柚木猪</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>大名鼎鼎宇宙...</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>二安猪</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>苦🐷大王</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>苹果猫小梦🐷</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>青青草原</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>曾巴马</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>天宫人美猪</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>一剑开天涯彡.</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>已退出猪圈</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>Zz</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>丶16猪🐷</strong>
+          <p>管理组</p>
+        </article>
+        <article class="manager">
+          <span class="rank">Admin</span>
+          <strong>安卓猫岑丕</strong>
+          <p>管理组</p>
+        </article>
+      </div>
+    </section>
+
     <section id="join" class="join">
       <div class="join-copy">
         <p class="eyebrow">Join Us</p>
@@ -142,7 +233,8 @@
           <li>尊重队友，不恶意开挂或破坏环境</li>
           <li>有 PvP 基础，或愿意长期练习</li>
         </ul>
-        <a class="button primary full" href="mailto:join@baima-guild.example">联系管理</a>
+        <a class="button primary full qq-button" href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2858281235&website=baima-guild" id="qq-contact">联系管理</a>
+        <p class="qq-fallback">如果没有自动打开 QQ，请搜索：<strong>2858281235</strong></p>
       </div>
     </section>
   </main>
@@ -151,5 +243,15 @@
     <span>白马公会 Minecraft PvP</span>
     <span>Born to fight. Built to win.</span>
   </footer>
+  <script>
+    const qqContact = document.getElementById("qq-contact");
+
+    qqContact.addEventListener("click", () => {
+      qqContact.textContent = "正在打开 QQ...";
+      window.setTimeout(() => {
+        qqContact.textContent = "QQ：2858281235";
+      }, 900);
+    });
+  </script>
 </body>
 </html>
