@@ -208,6 +208,44 @@ a {
   color: #ffffff;
 }
 
+.music-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.78);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.music-toggle span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.34);
+  box-shadow: 0 0 0 rgba(32, 226, 122, 0);
+}
+
+.music-toggle:hover,
+.music-toggle.is-playing {
+  border-color: rgba(32, 226, 122, 0.52);
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(32, 226, 122, 0.14);
+}
+
+.music-toggle.is-playing span {
+  background: var(--emerald);
+  box-shadow: 0 0 16px rgba(32, 226, 122, 0.8);
+}
+
 .hero {
   position: relative;
   min-height: calc(100vh - 68px);
@@ -977,6 +1015,11 @@ p {
     width: 100%;
     justify-content: space-between;
     gap: 8px;
+  }
+
+  .music-toggle {
+    width: 100%;
+    justify-content: center;
   }
 
   .hero {

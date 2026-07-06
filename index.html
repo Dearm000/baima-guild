@@ -47,6 +47,10 @@
       <a href="#management">管理</a>
       <a href="#join">加入</a>
     </nav>
+    <button class="music-toggle" type="button" id="music-toggle" aria-pressed="false" aria-label="播放背景音乐">
+      <span></span>
+      BGM
+    </button>
   </header>
 
   <main id="top">
@@ -304,6 +308,7 @@
   </footer>
   <script>
     const qqContact = document.getElementById("qq-contact");
+    const musicToggle = document.getElementById("music-toggle");
     const revealTargets = document.querySelectorAll(".section-title, .intro-grid article, .role, .lifestyle-grid article, .combat-card, .manager, .join-card, .tactics-panel");
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -314,6 +319,59 @@
     }, { threshold: 0.14 });
 
     revealTargets.forEach((target) => observer.observe(target));
+
+    let audioContext;
+    let musicTimer;
+    let musicOn = false;
+    let step = 0;
+    const notes = [196, 247, 294, 330, 294, 247, 220, 247, 196, 247, 330, 392, 330, 294, 247, 220];
+
+    function playTone(frequency, when, length, volume) {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.type = "triangle";
+      oscillator.frequency.setValueAtTime(frequency, when);
+      gain.gain.setValueAtTime(0, when);
+      gain.gain.linearRampToValueAtTime(volume, when + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, when + length);
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      oscillator.start(when);
+      oscillator.stop(when + length + 0.03);
+    }
+
+    function playBeat() {
+      if (!musicOn) return;
+      const now = audioContext.currentTime;
+      const melody = notes[step % notes.length];
+      const bass = step % 8 < 4 ? 98 : 123.5;
+      playTone(melody, now, 0.22, 0.035);
+      if (step % 2 === 0) playTone(bass, now, 0.34, 0.025);
+      step += 1;
+      musicTimer = window.setTimeout(playBeat, 260);
+    }
+
+    musicToggle.addEventListener("click", async () => {
+      if (!audioContext) {
+        audioContext = new AudioContext();
+      }
+
+      if (audioContext.state === "suspended") {
+        await audioContext.resume();
+      }
+
+      musicOn = !musicOn;
+      musicToggle.classList.toggle("is-playing", musicOn);
+      musicToggle.setAttribute("aria-pressed", String(musicOn));
+      musicToggle.setAttribute("aria-label", musicOn ? "暂停背景音乐" : "播放背景音乐");
+      musicToggle.lastChild.textContent = musicOn ? "ON" : "BGM";
+
+      if (musicOn) {
+        playBeat();
+      } else {
+        window.clearTimeout(musicTimer);
+      }
+    });
 
     qqContact.addEventListener("click", () => {
       qqContact.textContent = "正在打开 QQ...";
