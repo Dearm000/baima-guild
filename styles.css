@@ -173,6 +173,20 @@ a {
   letter-spacing: 0;
 }
 
+.brand-text {
+  display: grid;
+  gap: 2px;
+  line-height: 1.05;
+}
+
+.brand-text small {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .brand img {
   width: 40px;
   height: 40px;
@@ -245,6 +259,11 @@ a {
   text-transform: uppercase;
 }
 
+.title-stack {
+  display: grid;
+  gap: 12px;
+}
+
 .hero h1 {
   margin: 0;
   font-size: clamp(64px, 11vw, 150px);
@@ -253,6 +272,30 @@ a {
   text-shadow:
     0 14px 34px rgba(0, 0, 0, 0.55),
     0 0 34px rgba(32, 226, 122, 0.24);
+}
+
+.title-stack p {
+  position: relative;
+  width: fit-content;
+  margin: 0;
+  padding-left: 4px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.title-stack p::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  right: 0;
+  bottom: -10px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), rgba(32, 226, 122, 0.1));
+  box-shadow: 0 0 20px rgba(244, 197, 66, 0.28);
 }
 
 .hero-copy {
