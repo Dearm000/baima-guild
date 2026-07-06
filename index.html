@@ -325,6 +325,7 @@
     let musicOn = false;
     let step = 0;
     const notes = [196, 247, 294, 330, 294, 247, 220, 247, 196, 247, 330, 392, 330, 294, 247, 220];
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
 
     function playTone(frequency, when, length, volume) {
       const oscillator = audioContext.createOscillator();
@@ -345,15 +346,20 @@
       const now = audioContext.currentTime;
       const melody = notes[step % notes.length];
       const bass = step % 8 < 4 ? 98 : 123.5;
-      playTone(melody, now, 0.22, 0.035);
-      if (step % 2 === 0) playTone(bass, now, 0.34, 0.025);
+      playTone(melody, now, 0.22, 0.055);
+      if (step % 2 === 0) playTone(bass, now, 0.34, 0.04);
       step += 1;
       musicTimer = window.setTimeout(playBeat, 260);
     }
 
     musicToggle.addEventListener("click", async () => {
+      if (!AudioEngine) {
+        musicToggle.textContent = "手机不支持";
+        return;
+      }
+
       if (!audioContext) {
-        audioContext = new AudioContext();
+        audioContext = new AudioEngine();
       }
 
       if (audioContext.state === "suspended") {
@@ -364,9 +370,10 @@
       musicToggle.classList.toggle("is-playing", musicOn);
       musicToggle.setAttribute("aria-pressed", String(musicOn));
       musicToggle.setAttribute("aria-label", musicOn ? "暂停背景音乐" : "播放背景音乐");
-      musicToggle.lastChild.textContent = musicOn ? "ON" : "BGM";
+      musicToggle.childNodes[musicToggle.childNodes.length - 1].textContent = musicOn ? " ON" : " BGM";
 
       if (musicOn) {
+        playTone(392, audioContext.currentTime, 0.12, 0.07);
         playBeat();
       } else {
         window.clearTimeout(musicTimer);
