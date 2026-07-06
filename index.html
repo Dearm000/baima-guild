@@ -321,6 +321,8 @@
     revealTargets.forEach((target) => observer.observe(target));
 
     let audioContext;
+    let masterGain;
+    let compressor;
     let musicTimer;
     let musicOn = false;
     let step = 0;
@@ -336,7 +338,7 @@
       gain.gain.linearRampToValueAtTime(volume, when + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.001, when + length);
       oscillator.connect(gain);
-      gain.connect(audioContext.destination);
+      gain.connect(masterGain);
       oscillator.start(when);
       oscillator.stop(when + length + 0.03);
     }
@@ -346,8 +348,8 @@
       const now = audioContext.currentTime;
       const melody = notes[step % notes.length];
       const bass = step % 8 < 4 ? 98 : 123.5;
-      playTone(melody, now, 0.22, 0.055);
-      if (step % 2 === 0) playTone(bass, now, 0.34, 0.04);
+      playTone(melody, now, 0.22, 0.085);
+      if (step % 2 === 0) playTone(bass, now, 0.34, 0.06);
       step += 1;
       musicTimer = window.setTimeout(playBeat, 260);
     }
@@ -360,6 +362,16 @@
 
       if (!audioContext) {
         audioContext = new AudioEngine();
+        masterGain = audioContext.createGain();
+        compressor = audioContext.createDynamicsCompressor();
+        masterGain.gain.value = 1.65;
+        compressor.threshold.value = -20;
+        compressor.knee.value = 16;
+        compressor.ratio.value = 4;
+        compressor.attack.value = 0.004;
+        compressor.release.value = 0.18;
+        masterGain.connect(compressor);
+        compressor.connect(audioContext.destination);
       }
 
       if (audioContext.state === "suspended") {
@@ -373,7 +385,7 @@
       musicToggle.childNodes[musicToggle.childNodes.length - 1].textContent = musicOn ? " ON" : " BGM";
 
       if (musicOn) {
-        playTone(392, audioContext.currentTime, 0.12, 0.07);
+        playTone(392, audioContext.currentTime, 0.12, 0.1);
         playBeat();
       } else {
         window.clearTimeout(musicTimer);
